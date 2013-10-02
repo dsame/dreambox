@@ -1,4 +1,4 @@
 dreambox
 ========
 
-The JS popup image box of my dream. 
+The JS image popup box of my dream. 
