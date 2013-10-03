@@ -8,10 +8,15 @@
 		{d:'M65,65 l15,15',attr:{stroke:'#fff','stroke-width':3}}
 	];
 	var path_fit=[{d:"M 50 1 a 49 49 0 1 0 1 0 z",attr:{'stroke-width':1,'stroke':'#ddd',fill:'#111'}},{d:"M15,30 l70,0 l0,40 l-70,0 z",attr:{'stroke-width':8,'stroke':'#fff',fill:'#111'}}];
-	var path_full=[{d:"M 50 1 a 49 49 0 1 0 1 0 z",attr:{'stroke-width':1,'stroke':'#ddd',fill:'#111'}},{d:"M40,30 l70,0 l0,40 l-70,0 z",attr:{'stroke-width':8,'stroke':'#fff',fill:'#111'}}];
+	var path_full=[{d:"M 50 1 a 49 49 0 1 0 1 0 z",attr:{'stroke-width':1,'stroke':'#ddd',fill:'#111'}},{d:"M40,30 l0,40 M60,30 l0,40 z",attr:{'stroke-width':8,'stroke':'#fff',fill:'#111'}}];
+	var path_screen=[{d:"M 50 1 a 49 49 0 1 0 1 0 z",attr:{'stroke-width':1,'stroke':'#ddd',fill:'#111'}}];
 	var path_dummy=[{d:"M 50 1 a 49 49 0 1 0 1 0 z",attr:{'stroke-width':1,'stroke':'#ddd',fill:'#111'}}];
 	
   var return_false=function(){return false};
+
+	var fsCancel=document.CancelFullScreen||document.webkitCancelFullScreen||document.mozCancelFullScreen;
+	var fsEnabled=!!fsCancel;
+	var fsCurrent=false;
 
 	var getMouseXY=function(container,event){
 		var data=container.data('zooomy');
@@ -152,6 +157,7 @@
 		data.box.object.css('background-color',data.settings.bgColor);
 		if (data.box.object.css('position')=='static') data.box.object.css('position','relative');
 		data.box.object.html('');
+		container.resize(function(){resize(container)});
 	}
 	var setupPanel=function(container){
 		var data=container.data('zooomy');
@@ -163,30 +169,64 @@
 		var cppanel=cppaper.path(['m',-box.width/10,box.height,'a',box.height/1.6,box.height/8,0,0,1,box.width+box.width/5,0]).attr({fill:'black',stroke:'none','fill-opacity':0});
 
 		var arcl=cppanel.getTotalLength();
-		var buttonsl=4 * (100) + (4-1)*10; // n of buttons * button width + paddings
+		var buttonsn=5;
+		if (!fsEnabled) buttonsn=buttonsn-1;
+		//var buttonsl=buttonsn * (100) + (buttonsn-1)*10; // n of buttons * button width + paddings
+
 		var buttons=[];
-
 	  var ch=box.height;
+		var bx=[];for (var i=0;i<buttonsn;i++) bx.push({});
 			
-		var xb=(arcl-buttonsl)/2+50;
+		var xb=arcl/2;
 		var pt=cppanel.getPointAtLength(xb);
-		buttons.push(getButtonSet(cppaper,path_fit,pt.x,pt.y,ch,function(){
-			fitImage(container)
-		}));
+		if (buttonsn % 2==0) {
+			xb=xb-(ch-pt.y)*1.1/2;
+			pt=cppanel.getPointAtLength(xb);
+		}
 
-		xb=xb+100+10;
-		pt=cppanel.getPointAtLength(xb);
-		buttons.push(getButtonSet(cppaper,path_zoomin,pt.x,pt.y,ch,function(){zoominDown(container)},function(){zoominUp(container)}));
+		var pos=Math.ceil(buttonsn/2)-1;
 
-		xb=xb+100+10;
-		pt=cppanel.getPointAtLength(xb);
-		buttons.push(getButtonSet(cppaper,path_zoomout,pt.x,pt.y,ch,function(){zoomoutDown(container)},function(){zoomoutUp(container)}));
+		bx[pos].x=pt.x;
+		bx[pos].h=ch-pt.y;
+		bx[pos].t=pt.y
+		bx[pos].b=ch;
 
-		xb=xb+100+10;
-		pt=cppanel.getPointAtLength(xb);
-		buttons.push(getButtonSet(cppaper,path_full,pt.x,pt.y,ch,function(){
-			fullImage(container);
-		}));
+		var xb0=xb;
+		for (i=pos-1;i>=0;i--){
+			xb0=xb0-bx[i+1].h*1.1;
+			var pt=cppanel.getPointAtLength(xb0);
+			bx[i].x=pt.x;
+			bx[i].h=ch-pt.y;
+			bx[i].t=pt.y
+			bx[i].b=ch;
+		}
+
+		var xb0=xb;
+		for (i=pos+1;i<buttonsn;i++){
+			xb0=xb0+bx[i-1].h*1.1;
+			var pt=cppanel.getPointAtLength(xb0);
+			bx[i].x=pt.x;
+			bx[i].h=ch-pt.y;
+			bx[i].t=pt.y
+			bx[i].b=ch;
+		}
+
+		i=0;
+		buttons.push(getButtonSet(cppaper,path_fit,bx[i].x,bx[i].t,bx[i].b,function(){fitImage(container) }));
+
+		i=i+1;
+		buttons.push(getButtonSet(cppaper,path_zoomin,bx[i].x,bx[i].t,bx[i].b,function(){zoominDown(container)},function(){zoominUp(container)}));
+
+		if (fsEnabled){
+			i=i+1;
+			buttons.push(getButtonSet(cppaper,path_screen,bx[i].x,bx[i].t,bx[i].b,function(){fullScreen(container)}));
+		}
+
+		i=i+1;
+		buttons.push(getButtonSet(cppaper,path_zoomout,bx[i].x,bx[i].t,bx[i].b,function(){zoomoutDown(container)},function(){zoomoutUp(container)}));
+
+		i=i+1;
+		buttons.push(getButtonSet(cppaper,path_full,bx[i].x,bx[i].t,bx[i].b,function(){ fullImage(container); }));
 
 		data.cp={paper:cppaper,panel:cppanel,timer:false,status:0,buttons:buttons,disabled:false};
 	}
@@ -241,7 +281,7 @@
 			data.move=false;
 			data.zoom=0;
 			data.cp.disabled=false;
-			showCP(container);
+		//	showCP(container);
 		});
 		touchpad.mouseout(function (e) {
 			var data=container.data('zooomy');
@@ -283,6 +323,28 @@
 		image.left=cx-image.width/2;
 		image.top=cy-image.height/2;
 		data.scale=1;
+	}
+
+	function fullScreen(container)
+	{
+		if (!fsEnabled) return;
+		var state=document.FullScreen||document.webkitFullScreen||document.mozFullScreen;
+		if (state){
+			//fsCancel(document);
+			document[fsCancel.name]();
+		}else{
+			var e=container.get(0);
+			fsCurrent=container;
+
+			var func = e.requestFullScreen||e.webkitRequestFullScreen||e.mozRequestFullScreen;
+			if (func) 
+			{
+					if (Element["ALLOW_KEYBOARD_INPUT"])
+							func.call(e, Element["ALLOW_KEYBOARD_INPUT"]);
+					else
+							func.call(e);
+			}
+		}
 	}
 
 	var setupImageFit=function(container){
@@ -348,11 +410,13 @@
 
 	var getImgFromContainer=function(container,settings){
 		var img=$('img',container).first();
-		var src=img.get(0).src;
-		container.html('');
-		var i=new Image();
-		i.onload=function(){init(container,this,settings)};
-		i.src=src;
+		if (img.length>0){
+			var src=img.get(0).src;
+			container.html('');
+			var i=new Image();
+			i.onload=function(){init(container,this,settings)};
+			i.src=src;
+		}
 	}
 /* CP 
 States: Invisible -> Fading In -> Active -> Fading Out ->Invisible
@@ -466,11 +530,14 @@ Show  : Effective -> Ignored   -> Renew  -> Cancel+FadeIn -> Effective
 				image:{}});
 	
 		setupContainer(container);
-		setupPanel(container);
 		setupOrigin(container,img);
+		resize(container);
+/*
+		setupPanel(container);
 		setupImageFit(container);
 		drawImage(container);
 		setupTouchpad(container);
+*/
 	}	
 
 	var traverseContainers=function(j,settings){
@@ -479,6 +546,7 @@ Show  : Effective -> Ignored   -> Renew  -> Cancel+FadeIn -> Effective
 			getImgFromContainer(container,settings);
     });
 	}
+
 	
 	$.fn.dreambox = function(options) {
 		var settings = $.extend({
@@ -497,9 +565,63 @@ Show  : Effective -> Ignored   -> Renew  -> Cancel+FadeIn -> Effective
 		if (settings.dontLoadRaphael){
 			return traverseContainers(j,settings);
 		}else{
+			j.css('visibility','hidden');
 			$.getScript('http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js',function(){
+				j.css('visibility','');
 				return traverseContainers(j,settings);
 			})
 		}
 	};
+function resize(container)
+{
+	var data=container.data('zooomy');
+
+	data.box.object.html('');
+	data.box.width=container.width();
+	data.box.height=container.height();
+
+	setupPanel(container);
+	setupImageFit(container);
+	drawImage(container);
+	setupTouchpad(container);
+}
+function fullScreenChangeHandler(event)
+{
+	var container=fsCurrent;
+	resize(container);
+}
+
+/**
+ * Handles the browser-specific fullscreenerror event and triggers
+ * a jquery event for it.
+ *
+ * @param {?Event} event
+ *            The fullscreenerror event.
+ */
+function fullScreenErrorHandler(event)
+{
+	console.log(event);
+}
+
+    var e = document;
+    if (e["webkitCancelFullScreen"])
+    {
+        var change = "webkitfullscreenchange";
+        var error = "webkitfullscreenerror";
+    }
+    else if (e["mozCancelFullScreen"])
+    {
+        var change = "mozfullscreenchange";
+        var error = "mozfullscreenerror";
+    }
+    else 
+    {
+        var change = "fullscreenchange";
+        var error = "fullscreenerror";
+    }
+
+    // Install the event handlers
+    jQuery(document).bind(change, fullScreenChangeHandler);
+    jQuery(document).bind(error, fullScreenErrorHandler);
+
 }( jQuery ));
