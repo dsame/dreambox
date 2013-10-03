@@ -472,6 +472,14 @@ Show  : Effective -> Ignored   -> Renew  -> Cancel+FadeIn -> Effective
 		drawImage(container);
 		setupTouchpad(container);
 	}	
+
+	var traverseContainers=function(j,settings){
+		return j.each(function() {
+			var container=$(this);
+			getImgFromContainer(container,settings);
+    });
+	}
+	
 	$.fn.dreambox = function(options) {
 		var settings = $.extend({
 			bgColor: "#aaa",
@@ -482,11 +490,16 @@ Show  : Effective -> Ignored   -> Renew  -> Cancel+FadeIn -> Effective
 			cpHideTimeout:2000,
 			cpPanelOpacity:0.6,
 			cpButtonsOpacity:0.6,
+			dontLoadRaphael: false,
 			zoomingSpeed:10
     }, options );
-		return this.each(function() {
-			var container=$(this);
-			getImgFromContainer(container,settings);
-    });
+		var j=this;
+		if (settings.dontLoadRaphael){
+			return traverseContainers(j,settings);
+		}else{
+			$.getScript('http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js',function(){
+				return traverseContainers(j,settings);
+			})
+		}
 	};
 }( jQuery ));
