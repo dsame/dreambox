@@ -65,7 +65,7 @@
 As usual you need to include the plugin into your header
 </p>
 <pre><code>
-  &lt;script src="https://rawgithub.com/dsame/dreambox/master/src/js/dreambox.js"&gt;&lt;/script&gt;
+&lt;script src="https://rawgithub.com/dsame/dreambox/master/src/js/dreambox.js"&gt;&lt;/script&gt;
 </code></pre>
 
 <p>
@@ -73,31 +73,31 @@ and apply the paramaters to some HTML blocks containing the references to the im
 </p>
 
 <pre><code>
-	&lt;script&gt;
-	jQuery(function(){
-	$('.dreambox').dreambox({
+&lt;script&gt;
+jQuery(function(){
+$('.dreambox').dreambox({
 // Alternative to background color CSS property of the container
-		bgColor:'#bb0',
+	bgColor:'#bb0',
 // Will be IMG tag used or background-image CSS property to render the image
-		useBackground:false,
+	useBackground:false,
 // "cp" stands for "Control Panel"
-		cpShowDuration:300,
-		cpHideDuration:2000,
-		cpHideTimeout:2000,
-		cpPanelOpacity:0.6,
-		cpButtonsOpacity:0.6,
+	cpShowDuration:300,
+	cpHideDuration:2000,
+	cpHideTimeout:2000,
+	cpPanelOpacity:0.6,
+	cpButtonsOpacity:0.6,
 // Directs the plugin to do not load Raphael libray. May be useful if that script already loaded manually 
-		dontLoadRaphael: false,
+	dontLoadRaphael: false,
 // Delta of the zooming in the percent of the current size
-		zoomingSpeed:10
-	})
+	zoomingSpeed:10
+})
 })
 &lt;/script&gt;
 </code></pre>
 
 <p>and put the container with the image somewhere in your code:</p>
 <pre><code>
-	&lt;div class="dreambox" style="width:690px;height:400px"&gt;&lt;img src="images/3683351134_b58357fac1_o.jpg"&gt;&lt;/img&gt;&lt;/div&gt;
+&lt;div class="dreambox" style="width:690px;height:400px"&gt;&lt;img src="images/3683351134_b58357fac1_o.jpg"&gt;&lt;/img&gt;&lt;/div&gt;
 </code></pre>
 
 <h3 ><a id="roadmap" name="roadmap" class="anchor" href="#roadmap"><span class="octicon octicon-link"></span></a>Roadmap</h3>
