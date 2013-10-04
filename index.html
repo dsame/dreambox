@@ -20,13 +20,6 @@ jQuery(function(){
 $('.container').dreambox({bgColor:'#bb0',useBackground:false,cpHeight:'auto',cpShowDuration:300,cpHideDuration:2000,cpHideTimeout:2000,cpPanelOpacity:0.6,cpButtonsOpacity:0.6})
 })
 </script>
-<style>
-.dreambox {
-	height: 400px;
-	width: 802px;
-	overflow: hidden;
-}
-</style>
 
     <title>Dreambox by dsame</title>
   </head>
@@ -39,21 +32,56 @@ $('.container').dreambox({bgColor:'#bb0',useBackground:false,cpHeight:'auto',cpS
         <a href="https://github.com/dsame/dreambox" class="button"><small>View project on</small>GitHub</a>
       </div>
     </header>
-<div class="dreambox"><img src="images/3683351134_b58357fac1_o.jpg"></img></div>
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
           <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Hi-res images viewer</h3>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>Unlike the the others lightboxes dreambox does not enlarge a continer of the images to some another fixed size but let the image to be moved and zoomed to any desired scale and position</p>
+<p>Besides zooming and moving the plugin supports fullscreen mode of the modern browsers</p>
+<p>Disables right clicking and saving the image. Eliminates IMG tag from the HTML code</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+<h3>
+<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Use</h3>
+<p>
+As usual you need to include the plugin into your header and apply the paramaters to some HTML blocks containing the references to the images:
+</p>
+<pre><code>
+<html>
+ <head>
+  ...
+  <script src="https://rawgithub.com/dsame/dreambox/master/src/js/dreambox.js"></script>
+	<script>
+	jQuery(function(){
+	$('.container').dreambox({
+// Alternative to background color CSS property of the container
+		bgColor:'#bb0',
+// Will be IMG tag used or background-image CSS property to render the image
+		useBackground:false,
+// "cp" stands for "Control Panel"
+		cpShowDuration:300,
+		cpHideDuration:2000,
+		cpHideTimeout:2000,
+		cpPanelOpacity:0.6,
+		cpButtonsOpacity:0.6
+// Directs the plugin to do not load Raphael libray. May be useful if that script already loaded manually 
+		dontLoadRaphael: false,
+// Delta of the zooming in the percent of the current size
+		zoomingSpeed:10
+	})
+})
+</script>
+<style>
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>and put the container with the image somewhere in your code:</p>
+<pre><code>
+	<div class="dreambox" style="width:802px;height:400px"><img src="images/3683351134_b58357fac1_o.jpg"></img></div>
+</code></pre>
+
+<div class="dreambox" style="width:802px;height:400px"><img src="images/3683351134_b58357fac1_o.jpg"></img></div>
+
 
 <h3>
 <a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
