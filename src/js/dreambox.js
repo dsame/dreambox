@@ -263,6 +263,8 @@
 		}else{
 			var holder=$('<img style="position:absolute;left:'+image.left+'px;top:'+image.top+'px;height:'+image.height+'px;width:'+image.width+'px" src="'+origin.src+'"></img');
 		}
+		holder.css('max-width','none');
+		holder.css('max-height','none');
 		image.holder=holder;
 		box.object.prepend(holder);
 	}
