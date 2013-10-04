@@ -62,18 +62,22 @@
 <h3>
 <a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Use</h3>
 <p>
-As usual you need to include the plugin into your header and apply the paramaters to some HTML blocks containing the references to the images:
+As usual you need to include the plugin into your header
 </p>
 <pre><code>
-&lt;html&gt;
- &lt;head&gt;
-  ...
   &lt;script src="https://rawgithub.com/dsame/dreambox/master/src/js/dreambox.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>
+and apply the paramaters to some HTML blocks containing the references to the images:
+</p>
+
+<pre><code>
 	&lt;script&gt;
 	jQuery(function(){
 	$('.dreambox').dreambox({
 // Alternative to background color CSS property of the container
-		bgColor:'black',
+		bgColor:'#bb0',
 // Will be IMG tag used or background-image CSS property to render the image
 		useBackground:false,
 // "cp" stands for "Control Panel"
