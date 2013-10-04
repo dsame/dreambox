@@ -154,7 +154,9 @@
 		data.box.object=container; //for unification
 		data.box.width=container.width();
 		data.box.height=container.height();
-		data.box.object.css('background-color',data.settings.bgColor);
+		if (data.settings.bgColor)
+			data.box.object.css('background-color',data.settings.bgColor);
+		data.box.object.css('overflow','hidden');
 		if (data.box.object.css('position')=='static') data.box.object.css('position','relative');
 		data.box.object.html('');
 		container.resize(function(){resize(container)});
@@ -550,7 +552,7 @@ Show  : Effective -> Ignored   -> Renew  -> Cancel+FadeIn -> Effective
 	
 	$.fn.dreambox = function(options) {
 		var settings = $.extend({
-			bgColor: "#aaa",
+			bgColor: false,
 			useBackground: false,
 			cpHeight: 'auto',
 			cpShowDuration:300,
