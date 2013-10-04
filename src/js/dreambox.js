@@ -52,12 +52,14 @@
 			attr['stroke-opacity']=0;
 			attr['fill-opacity']=0;
 			attr['cursor']='pointer';
-			if (!mousedown) mousedown=return_false;
-			if (!mouseup) mouseup=function(){alert("No acion")};
 			var btn=paper.path(paper.raphael.transformPath(paths[i].d,['S',scale,scale,50,50,'T',cx-50,top+(bottom-top)/2-50])).attr(paths[i].attr);
 			//.mousedown(mousedown).mouseup(mouseup);
 			//$(btn.canvas).bind('dragstart', return_false);
 		}
+		if (!mousedown)
+			mousedown=return_false;
+		if (!mouseup)
+			mouseup=return_false;
 		return {set:paper.setFinish(),mousedown:mousedown,mouseup:mouseup};
 	}
 	var startMove=function(container,event){
@@ -67,24 +69,28 @@
 	var zoominDown=function(container){
 		var data=container.data('zooomy');
 		data.zoom=1;
-		data.cp.disabled=true;
+		showCP(container);
+		//data.cp.disabled=true;
 	}
 	var zoominUp=function(container){
 		var data=container.data('zooomy');
 		if (data.zoom==1) {
 			scaleImage(container,1);
 		}
+		resetCPTimer(container);
 	}
 	var zoomoutDown=function(container){
 		var data=container.data('zooomy');
 		data.zoom=-1;
-		data.cp.disabled=true;
+		//data.cp.disabled=true;
+		showCP(container);
 	}
 	var zoomoutUp=function(container){
 		var data=container.data('zooomy');
 		if (data.zoom==-1) {
 			scaleImage(container,-1);
 		}
+		resetCPTimer(container);
 	}
 	var scaleImage=function(container,direction){
 		var data=container.data('zooomy');
@@ -283,6 +289,7 @@
 			data.move=false;
 			data.zoom=0;
 			data.cp.disabled=false;
+			resetCPTimer(container);
 		//	showCP(container);
 		});
 		touchpad.mouseout(function (e) {
@@ -290,7 +297,7 @@
 			data.move=false;
 			data.zoom=0;
 			data.cp.disabled=false;
-			showCP(container);
+			hideCP(container);
 		})
 
 		touchpad.mousemove(function (e) {
@@ -437,7 +444,7 @@ Show  : Effective -> Ignored   -> Renew  -> Cancel+FadeIn -> Effective
 			clearTimeout(cp.timer);
 			cp.timer=false;
 		};
-
+//console.log(data.cp);
 		if (data.cp.disabled) return;
 // status 1 handled
     if (cp.status==1) return;
@@ -473,6 +480,7 @@ Show  : Effective -> Ignored   -> Renew  -> Cancel+FadeIn -> Effective
 			clearTimeout(cp.timer);
 			cp.timer=false;
 		};
+		if (duration==undefined) duration=data.settings.cpHideDuration;
 		for (var i=0;i<cp.buttons.length;i++)
 			cp.buttons[i].set.forEach(function(el){
 				if (duration==0)
@@ -591,6 +599,7 @@ function fullScreenChangeHandler(event)
 {
 	var container=fsCurrent;
 	resize(container);
+  hideCP(container,0);
 }
 
 /**
@@ -602,7 +611,6 @@ function fullScreenChangeHandler(event)
  */
 function fullScreenErrorHandler(event)
 {
-	console.log(event);
 }
 
     var e = document;
