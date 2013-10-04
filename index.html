@@ -16,9 +16,23 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="https://rawgithub.com/dsame/dreambox/master/src/js/dreambox.js"></script>
 <script>
-jQuery(function(){
-$('.container').dreambox({bgColor:'#bb0',useBackground:false,cpHeight:'auto',cpShowDuration:300,cpHideDuration:2000,cpHideTimeout:2000,cpPanelOpacity:0.6,cpButtonsOpacity:0.6})
-})
+	jQuery(function(){
+	$('.dreambox').dreambox({
+// Alternative to background color CSS property of the container
+		bgColor:'#bb0',
+// Will be IMG tag used or background-image CSS property to render the image
+		useBackground:false,
+// "cp" stands for "Control Panel"
+		cpShowDuration:300,
+		cpHideDuration:2000,
+		cpHideTimeout:2000,
+		cpPanelOpacity:0.6,
+		cpButtonsOpacity:0.6,
+// Directs the plugin to do not load Raphael libray. May be useful if that script already loaded manually 
+		dontLoadRaphael: false,
+// Delta of the zooming in the percent of the current size
+		zoomingSpeed:10
+	})
 </script>
 
     <title>Dreambox by dsame</title>
@@ -54,7 +68,7 @@ As usual you need to include the plugin into your header and apply the paramater
   <script src="https://rawgithub.com/dsame/dreambox/master/src/js/dreambox.js"></script>
 	<script>
 	jQuery(function(){
-	$('.container').dreambox({
+	$('.dreambox').dreambox({
 // Alternative to background color CSS property of the container
 		bgColor:'#bb0',
 // Will be IMG tag used or background-image CSS property to render the image
@@ -64,7 +78,7 @@ As usual you need to include the plugin into your header and apply the paramater
 		cpHideDuration:2000,
 		cpHideTimeout:2000,
 		cpPanelOpacity:0.6,
-		cpButtonsOpacity:0.6
+		cpButtonsOpacity:0.6,
 // Directs the plugin to do not load Raphael libray. May be useful if that script already loaded manually 
 		dontLoadRaphael: false,
 // Delta of the zooming in the percent of the current size
