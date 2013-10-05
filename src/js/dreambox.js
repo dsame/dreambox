@@ -426,8 +426,13 @@
 			container.html('<img src="clock.png">');
 			//container.html('<div style="margin-top:25%;text-align:center">Loading...</div>');
 			var i=new Image();
-			i.onload=function(){init(container,this,settings)};
-			i.src=src;
+			setTimeout(
+				function(){
+					i.onload=function(){init(container,this,settings)};
+					i.src=src;
+				},
+				4000
+			)
 		}
 	}
 /* CP 
