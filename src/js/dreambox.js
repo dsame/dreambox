@@ -92,7 +92,7 @@
 		}
 		resetCPTimer(container);
 	}
-	var scaleImage=function(container,direction){
+	var scaleImage=function(container,direction,slow){
 		var data=container.data('zooomy');
 		var box=data.box;
 		var image=data.image;
@@ -101,6 +101,7 @@
 		var settings=data.settings;
 
 		var step=settings.zoomingSpeed>=1?settings.zoomingSpeed/100:settings.zoomingSpeed;
+		if (slow) step=step/5;
 
 		if (origin.width>origin.height){
 			var d=origin.width*step/data.scale;
@@ -311,7 +312,7 @@
 					hideCP(container,0);
 				}
 				if (data.zoom!=0)
-					scaleImage(container,data.zoom);
+					scaleImage(container,data.zoom,true);
 				else if (data.move)
 					moveImage(container,getMouseXY(container,e));
 			}
