@@ -423,8 +423,7 @@
 		var img=$('img',container).first();
 		if (img.length>0){
 			var src=img.get(0).src;
-			container.html('<img src="clock.png">');
-			//container.html('<div style="margin-top:25%;text-align:center">Loading...</div>');
+			container.html('<img src="clock.png" width="' + container.width() + '" height="' + container.height() + '">');
 			var i=new Image();
 			setTimeout(
 				function(){
