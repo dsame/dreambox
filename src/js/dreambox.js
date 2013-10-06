@@ -36,13 +36,20 @@
 	}
 
 	var getButtonSet=function(panel,base64,cx,cy,mousedown,mouseup){
-		var img=new Image();
-		img.src='data:image/png;base64,'+base64;
-		var w=img.width;
-		var h=img.height;
-
-		var btn=$('<div style="position:absolute;left:'+Math.floor(cx-w/2)+';top:'+Math.floor(cy-h/2)+';width:'+w+';height:'+h+'; background-image:url('+img.src+')"/>')
+		var btn=$('<div style="position:absolute"></div>');
 		panel.append(btn);
+		var img=new Image();
+		img.onload=function(){
+			var w=img.width;
+			var h=img.height;
+			btn.css('left',Math.floor(cx-w/2)+'px');
+			btn.css('top',Math.floor(cy-h/2)+'px');
+			btn.css('width',w+'px');
+			btn.css('height',h+'px');
+			btn.css('background-image','url('+img.src+')');
+		};
+		img.src='data:image/png;base64,'+base64;
+
 
 		if (!mousedown)
 			mousedown=return_false;
