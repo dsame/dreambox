@@ -36,7 +36,7 @@
 		return ret;
 	}
 
-	var getButtonSet=function(panel,base64,cx,cy,mousedown,mouseup){
+	var getButtonSet=function(panel,base64,cx,cy,mousedown,mouseup,dblclick){
 		var btn=$('<div style="position:absolute"></div>');
 		panel.append(btn);
 		var img=new Image();
@@ -56,17 +56,18 @@
 			mousedown=return_false;
 		if (!mouseup)
 			mouseup=return_false;
-		return {set:btn,mousedown:mousedown,mouseup:mouseup};
+		if (!dblclick)
+			dblclick=return_false;
+		return {set:btn,mousedown:mousedown,mouseup:mouseup,dblclick:dblclick};
 	}
 	var startMove=function(container,event){
 		var data=container.data('zooomy');
 		data['move']=getMouseXY(container,event);
 	}
 	var zoominDown=function(container){
+		showCP(container);
 		var data=container.data('zooomy');
 		data.zoom=1;
-		showCP(container);
-		//data.cp.disabled=true;
 	}
 	var zoominUp=function(container){
 		var data=container.data('zooomy');
@@ -76,10 +77,10 @@
 		resetCPTimer(container);
 	}
 	var zoomoutDown=function(container){
-		var data=container.data('zooomy');
-		data.zoom=-1;
-		//data.cp.disabled=true;
 		showCP(container);
+		var data=container.data('zooomy');
+		if (data.image.height<=data.minHeight||data.image.width<=data.minWidth) return;
+		data.zoom=-1;
 	}
 	var zoomoutUp=function(container){
 		var data=container.data('zooomy');
@@ -113,14 +114,15 @@
 
 		if (l<16) return; //too small
 
-		data.scale=s;
 
 		var cx=image.left+image.width/2
 		var cy=image.top+image.height/2
 
-		var h=origin.height/data.scale;
-		var w=origin.width/data.scale;
+		var h=origin.height/s;
+		var w=origin.width/s;
+		if (h<data.minHeight||w<data.minWidth) return;
 
+		data.scale=s;
 		image.width=w;
 		image.height=h;
 		image.left=cx-image.width/2;
@@ -239,12 +241,23 @@
 		data.box.object.append(touchpad);
 		data.touchpad.object=touchpad;
 
+		touchpad.dblclick(function(e){
+			var b=getButtonForMouseEvent(container,e);
+			if (b)
+				b.dblclick(e);
+			else
+				fitImage(container);
+			e.preventDefault();
+			e.isPropagationStopped();
+		});
 		touchpad.mousedown(function (e) {
 			var b=getButtonForMouseEvent(container,e);
 			if (b) b.mousedown(e);
 			else{
 				startMove(container,e);
 			}
+			e.preventDefault();
+			e.isPropagationStopped();
 		});
 
 		touchpad.mouseup(function (e) {
@@ -257,7 +270,8 @@
 			data.zoom=0;
 			data.cp.disabled=false;
 			resetCPTimer(container);
-		//	showCP(container);
+			e.preventDefault();
+			e.isPropagationStopped();
 		});
 		touchpad.mouseout(function (e) {
 			var data=container.data('zooomy');
@@ -265,6 +279,8 @@
 			data.zoom=0;
 			data.cp.disabled=false;
 			hideCP(container);
+			e.preventDefault();
+			e.isPropagationStopped();
 		})
 
 		touchpad.mousemove(function (e) {
@@ -280,6 +296,8 @@
 				else if (data.move)
 					moveImage(container,getMouseXY(container,e));
 			}
+			e.preventDefault();
+			e.isPropagationStopped();
 		});
 	}
 
@@ -362,6 +380,8 @@
 			image.left=l;
 			image.top=t;
 			data.scale=k;
+			data.minHeight=h;
+			data.minWidth=h;
 	}
 
 	var moveImage=function(container,xy){
@@ -496,12 +516,6 @@ Show  : Effective -> Ignored   -> Renew  -> Cancel+FadeIn -> Effective
 		setupContainer(container);
 		setupOrigin(container,img);
 		resize(container);
-/*
-		setupPanel(container);
-		setupImageFit(container);
-		drawImage(container);
-		setupTouchpad(container);
-*/
 	}	
 
 	var traverseContainers=function(j,settings){
