@@ -7,16 +7,18 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
    width="100%"
    height="100%"
-   viewBox="0 0 100 100"
+   viewBox="0 0 64 64"
    id="svg3210"
    inkscape:version="0.48.2 r9819"
-   sodipodi:docname="fs2.svg">
+   sodipodi:docname="fs.svg"
+   inkscape:export-filename="/Users/dsa/MyProjects/dreambox/src/images/fs.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <sodipodi:namedview
      pagecolor="#ffffc4"
      bordercolor="#666666"
@@ -24,29 +26,25 @@
      objecttolerance="10"
      gridtolerance="10"
      guidetolerance="10"
-     inkscape:pageopacity="1"
+     inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="961"
-     inkscape:window-height="694"
+     inkscape:window-width="1077"
+     inkscape:window-height="831"
      id="namedview3176"
      showgrid="false"
-     inkscape:zoom="9.0971294"
-     inkscape:cx="50"
-     inkscape:cy="51.065128"
-     inkscape:window-x="322"
-     inkscape:window-y="109"
+     inkscape:zoom="5.847832"
+     inkscape:cx="19.470224"
+     inkscape:cy="37.418344"
+     inkscape:window-x="608"
+     inkscape:window-y="0"
      inkscape:window-maximized="0"
      inkscape:current-layer="svg3210"
      showguides="true"
      inkscape:guide-bbox="true">
     <sodipodi:guide
        orientation="1,0"
-       position="50.274598,92.814642"
+       position="50.388271,35.745526"
        id="guide4282" />
-    <sodipodi:guide
-       orientation="0,1"
-       position="31.752377,76.531371"
-       id="guide4284" />
     <sodipodi:guide
        orientation="0,1"
        position="40.504635,39.079849"
@@ -73,16 +71,76 @@
        id="guide4296" />
     <sodipodi:guide
        orientation="1,0"
-       position="17.300975,44.371912"
+       position="17.053622,81.126515"
        id="guide4298" />
-    <sodipodi:guide
-       orientation="1,0"
-       position="27.274478,63.504755"
-       id="guide4300" />
     <sodipodi:guide
        orientation="1,0"
        position="72.664094,63.301214"
        id="guide4302" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="40.82742,89.923684"
+       id="guide3349" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="9.9484536,51.292676"
+       id="guide3351" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="90.095952,46.426117"
+       id="guide3353" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="23.022389,90.688724"
+       id="guide4125" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="55.642433,86.952068"
+       id="guide4127" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="60.336725,42.033293"
+       id="guide4129" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="13.03384,83.867276"
+       id="guide4131" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="86.779801,52.670817"
+       id="guide4133" />
+    <sodipodi:guide
+       orientation="-0.70710678,0.70710678"
+       position="40.806881,83.136406"
+       id="guide4135" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="27.224889,83.136406"
+       id="guide4137" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="40.989598,85.511732"
+       id="guide4139" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="28.991157,83.136406"
+       id="guide4141" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="35.02083,84.354522"
+       id="guide4143" />
+    <sodipodi:guide
+       orientation="-0.70710678,0.70710678"
+       position="37.335251,70.041661"
+       id="guide4145" />
+    <sodipodi:guide
+       orientation="0.70710678,0.70710678"
+       position="47.811047,66.87456"
+       id="guide4147" />
+    <sodipodi:guide
+       orientation="0.70710678,0.70710678"
+       position="32.340976,56.094235"
+       id="guide4149" />
   </sodipodi:namedview>
   <metadata
      id="metadata3220">
@@ -98,26 +156,54 @@
   </metadata>
   <defs
      id="defs3218" />
-  <image
-     y="13.513528"
-     x="17.597002"
-     id="image4210"
-     xlink:href="file:///Users/dsa/MyProjects/dreambox/src/images/fs.png"
-     height="65"
-     width="64" />
   <path
-     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     d="m 17.300975,23.468629 64.318918,0 0,37.451522 -64.318918,0 0,-37.451522"
-     id="path4304"
-     inkscape:connector-curvature="0" />
+     inkscape:connector-curvature="0"
+     id="path4155"
+     d="M 1,39.518519 1,51 l 11.481481,-0.01763 -2.307984,-2.219763 2.307984,-2.325729 -6.295827,-6.344258 -2.30798,2.325738 z"
+     style="fill:#ffffff;fill-opacity:1;stroke:none"
+     sodipodi:nodetypes="cccccccc"
+     inkscape:export-filename="/Users/dsa/MyProjects/dreambox/src/images/fs.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <g
+     id="g5033">
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/Users/dsa/MyProjects/dreambox/src/images/fs.png"
+       sodipodi:nodetypes="cccccccc"
+       inkscape:connector-curvature="0"
+       id="path4151"
+       d="m 1,24.592593 0,-11.481482 11.481481,0.03009 -2.307982,2.207326 2.307982,2.325731 -6.295823,6.344257 -2.307982,-2.325737 z"
+       style="fill:#ffffff;fill-opacity:1;stroke:none" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/Users/dsa/MyProjects/dreambox/src/images/fs.png"
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       d="m 63,24.592593 0,-11.481482 -11.481481,0.03008 2.307983,2.207327 -2.307983,2.325732 6.295823,6.344255 2.307984,-2.325739 z"
+       id="path4157"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccccc" />
+  </g>
   <path
-     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     d="m 27.070937,62.95556 45.593157,0 0,3.867276 -45.389616,0 z"
-     id="path4306"
-     inkscape:connector-curvature="0" />
-  <path
-     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     d="m 17.300975,69.265327 64.318918,0 0,9.15934 -64.318918,0 z"
-     id="path4308"
-     inkscape:connector-curvature="0" />
+     style="fill:#ffffff;fill-opacity:1;stroke:none"
+     d="M 63,39.518519 63,51 51.518519,50.969919 53.826502,48.7626 l -2.307983,-2.325732 6.295823,-6.344254 2.307984,2.325731 z"
+     id="path4159"
+     inkscape:connector-curvature="0"
+     sodipodi:nodetypes="cccccccc"
+     inkscape:export-filename="/Users/dsa/MyProjects/dreambox/src/images/fs.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <text
+     xml:space="preserve"
+     style="font-size:16.31891632px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans"
+     x="19.999859"
+     y="37.947594"
+     id="text4342"
+     sodipodi:linespacing="125%"><tspan
+       sodipodi:role="line"
+       id="tspan4344"
+       x="19.999859"
+       y="37.947594">full</tspan></text>
 </svg>
