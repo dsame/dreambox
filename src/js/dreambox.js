@@ -572,9 +572,6 @@ Show  : Effective -> Ignored   -> Renew  -> Cancel+FadeIn -> Effective
 			cpShowDuration:300,
 			cpHideDuration:1000,
 			cpHideTimeout:2000,
-			cpPanelOpacity:0.6,
-			cpButtonsOpacity:0.6,
-			//dontLoadRaphael: false,
 			zoomingSpeed:10
     }, options );
 		var j=this;
@@ -603,12 +600,9 @@ function fullScreenChangeHandler(event)
 		if (fsSet){
 			data.box.width_bak=container.width();
 			data.box.height_bak=container.height();
-			//data.box.offset_bak=container.offset();
-			//container.offset({top:0,left:0});
 			container.width($(document).width());
 			container.height($(document).height());
 		}else{
-			//container.offset(data.box.offset_bak);
 			container.height(data.box.height_bak);
 			container.width(data.box.width_bak);
 		}
