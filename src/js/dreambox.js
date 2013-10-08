@@ -423,7 +423,25 @@
 		var img=$('img',container).first();
 		if (img.length>0){
 			var src=img.get(0).src;
-			container.html('<img src="clock.png" width="' + container.width() + '" height="' + container.height() + '">');
+			
+			var imageWidth = 512;
+			var imageHeight = 512;
+            var diffWidth = imageWidth - container.width();
+            var diffHeight = imageHeight - container.height();
+            if (diffWidth > 0 || diffHeight > 0) {
+				if (diffWidth < diffHeight) {
+					imageWidth *= container.height() / imageHeight;
+					imageHeight = container.height();
+				}
+				else {
+					imageHeight *= container.width() / imageWidth;
+					imageWidth = container.width();
+				}
+		    }
+		    var marginTop = Math.ceil((container.height() - imageHeight) / 2);
+		    var marginLeft = Math.ceil((container.width() - imageWidth) / 2);
+
+			container.html('<img src="clock.png" style="margin:' + marginTop + "px 0 0 " + marginLeft + 'px;" width="' + imageWidth + 'px" height="' + imageHeight + 'px">');
 			var i=new Image();
 			setTimeout(
 				function(){
