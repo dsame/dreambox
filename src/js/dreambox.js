@@ -334,6 +334,8 @@
 	function fullScreen(container)
 	{
 		if (!fsEnabled) return;
+		var data=container.data('zooomy');
+		data.box.object.css('visibility','hidden');
 		if (fsSet){
 			document[fsCancel.name]();
 		}else{
@@ -593,8 +595,8 @@ function fullScreenChangeHandler(event)
 {
 	var container=fsCurrent;
 	fsSet=!fsSet;	
+	var data=container.data('zooomy');
 	if (!document.mozCancelFullScreen){;
-		var data=container.data('zooomy');
 		if (fsSet){
 			data.box.width_bak=container.width();
 			data.box.height_bak=container.height();
@@ -606,6 +608,7 @@ function fullScreenChangeHandler(event)
 		}
 	}
 	resize(container);
+	data.box.object.css('visibility','');
   hideCP(container,0);
 }
 
