@@ -334,9 +334,7 @@
 	function fullScreen(container)
 	{
 		if (!fsEnabled) return;
-		var state=document.FullScreen||document.webkitFullScreen||document.mozFullScreen;
-		if (state){
-			//fsCancel(document);
+		if (fsSet){
 			document[fsCancel.name]();
 		}else{
 			var e=container.get(0);
@@ -600,8 +598,8 @@ function fullScreenChangeHandler(event)
 		if (fsSet){
 			data.box.width_bak=container.width();
 			data.box.height_bak=container.height();
-			container.width($(document).width());
-			container.height($(document).height());
+			container.width($(window).width());
+			container.height($(window).height());
 		}else{
 			container.height(data.box.height_bak);
 			container.width(data.box.width_bak);
