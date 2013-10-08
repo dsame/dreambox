@@ -20,6 +20,7 @@
 	var fsCancel=document.CancelFullScreen||document.webkitCancelFullScreen||document.mozCancelFullScreen;
 	var fsEnabled=!!fsCancel;
 	var fsCurrent=false;
+	var fsSet=false;
 
 	var getMouseXY=function(container,event){
 		var data=container.data('zooomy');
@@ -579,6 +580,7 @@ Show  : Effective -> Ignored   -> Renew  -> Cancel+FadeIn -> Effective
 		var j=this;
 		return traverseContainers(j,settings);
 	};
+
 function resize(container)
 {
 	var data=container.data('zooomy');
@@ -595,6 +597,22 @@ function resize(container)
 function fullScreenChangeHandler(event)
 {
 	var container=fsCurrent;
+	fsSet=!fsSet;	
+	if (!document.mozCancelFullScreen){;
+		var data=container.data('zooomy');
+		if (fsSet){
+			data.box.width_bak=container.width();
+			data.box.height_bak=container.height();
+			//data.box.offset_bak=container.offset();
+			//container.offset({top:0,left:0});
+			container.width($(document).width());
+			container.height($(document).height());
+		}else{
+			//container.offset(data.box.offset_bak);
+			container.height(data.box.height_bak);
+			container.width(data.box.width_bak);
+		}
+	}
 	resize(container);
   hideCP(container,0);
 }
