@@ -345,9 +345,6 @@
 			var func = e.requestFullScreen||e.webkitRequestFullScreen||e.mozRequestFullScreen;
 			if (func) 
 			{
-					if (Element["ALLOW_KEYBOARD_INPUT"])
-							func.call(e, Element["ALLOW_KEYBOARD_INPUT"]);
-					else
 							func.call(e);
 			}
 		}
