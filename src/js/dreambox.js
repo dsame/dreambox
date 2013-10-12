@@ -424,8 +424,8 @@
 		if (img.length>0){
 			var src=img.get(0).src;
 			
-			var imageWidth = 512;
-			var imageHeight = 512;
+			var imageWidth = 64;
+			var imageHeight = 64;
             var diffWidth = imageWidth - container.width();
             var diffHeight = imageHeight - container.height();
             if (diffWidth > 0 || diffHeight > 0) {
@@ -438,10 +438,9 @@
 					imageWidth = container.width();
 				}
 		    }
-		    var marginTop = Math.ceil((container.height() - imageHeight) / 2);
-		    var marginLeft = Math.ceil((container.width() - imageWidth) / 2);
 
-			container.html('<img src="clock.png" style="margin:' + marginTop + "px 0 0 " + marginLeft + 'px;" width="' + imageWidth + 'px" height="' + imageHeight + 'px">');
+			container.html('<div style="margin-left:50%; position: relative; height: 100%;"><img src="clock.png" style="margin-top: -32px; margin-left:-32px; position: absolute; top: 50%;" width="' + imageWidth 
+				+ 'px" height="' + imageHeight + 'px"></div>');
 			var i=new Image();
 			setTimeout(
 				function(){
